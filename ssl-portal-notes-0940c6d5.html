@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华体会 · 日常质感 | 杂志专题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f5f1;
+            font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #2c2b28;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ----- 深色横幅 ------ */
+        .hero {
+            background: #1a1c1d;
+            background-image: radial-gradient(circle at 20% 30%, #3a3e42 0%, #0f1011 90%);
+            color: #eae6df;
+            padding: 6rem 2rem 4.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -10%;
+            width: 140%;
+            height: 200%;
+            background: repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 18px,
+                    rgba(255, 215, 140, 0.02) 18px,
+                    rgba(255, 215, 140, 0.02) 36px);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 350;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 span {
+            font-weight: 600;
+            color: #f5cd7a;
+        }
+
+        .hero .sub {
+            max-width: 560px;
+            margin: 0.4rem auto 0;
+            font-size: 1.05rem;
+            opacity: 0.75;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1.2rem;
+            display: inline-block;
+        }
+
+        /* ----- 浅色正文区 ------ */
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+            flex: 1;
+        }
+
+        /* 三段式卡片布局 */
+        .feature-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.8rem;
+            margin: 1.8rem 0 2.5rem;
+        }
+
+        .feature-item {
+            background: white;
+            border-radius: 28px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02), 0 8px 30px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border-left: 4px solid #b08968;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-item h2 {
+            font-size: 1.5rem;
+            font-weight: 470;
+            margin-bottom: 0.6rem;
+            color: #2d2a24;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-item h2 small {
+            font-size: 1rem;
+            font-weight: 350;
+            color: #9a8b7a;
+            margin-left: 0.2rem;
+        }
+
+        .feature-item p {
+            margin-bottom: 0.4rem;
+            color: #3e3b35;
+        }
+
+        .feature-item p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 强调色链接 */
+        a.emphasis-link {
+            color: #a57f5a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.2s, color 0.2s;
+        }
+
+        a.emphasis-link:hover {
+            color: #6d4f32;
+            border-bottom: 1px solid #b08968;
+        }
+
+        /* 场景/提示微卡 */
+        .extra-note {
+            background: #f0ece5;
+            border-radius: 40px;
+            padding: 2rem 2.8rem;
+            margin: 3rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1.2rem;
+            font-size: 1rem;
+            border: 1px solid #e2d9ce;
+        }
+
+        .extra-note .tag {
+            font-weight: 500;
+            color: #4e4235;
+            letter-spacing: 0.3px;
+        }
+
+        .extra-note .tag i {
+            font-style: normal;
+            background: #cbb295;
+            color: #1f1d19;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-left: 0.4rem;
+        }
+
+        .extra-note .more {
+            color: #5d5345;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+
+        /* 页尾访问提示 */
+        .site-footer {
+            background: #2d2b27;
+            color: #dbd4c9;
+            padding: 2rem 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            border-top: 2px solid #b08968;
+        }
+
+        .site-footer .footer-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .site-footer .footer-inner a {
+            color: #eacead;
+            border-bottom: 1px dotted #b08968;
+        }
+
+        .site-footer .footer-inner a:hover {
+            color: #fae2c3;
+            border-bottom: 1px solid #fae2c3;
+        }
+
+        .site-footer small {
+            display: block;
+            margin-top: 0.7rem;
+            opacity: 0.5;
+            font-size: 0.8rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 680px) {
+            .hero {
+                padding: 4rem 1.2rem 3rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .wrapper {
+                padding: 2rem 1.2rem 3rem;
+            }
+            .feature-item {
+                padding: 1.5rem 1.5rem;
+            }
+            .extra-note {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.5rem 1.8rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 / 横幅 -->
+    <header class="hero">
+        <h1>· <span>华体会</span> ·</h1>
+        <div class="sub">从日常的质地中，发现另一种节奏</div>
+    </header>
+
+    <!-- 正文：三段自然介绍 + 场景卡片 -->
+    <main class="wrapper">
+
+        <div class="feature-grid">
+
+            <section class="feature-item">
+                <h2>⏳ 回甘 <small>· 不止片刻</small></h2>
+                <p>许多事情并不急于立刻获得答案。一杯茶由烫转温，页面从加载到呈现，那些不经意间被我们命名为「等待」的间隙，其实藏着最舒服的缓冲。在<a href="https://ssl-portal-huatihui.com" class="emphasis-link">华体会</a>所映射的语境里，我们更愿意把它看作一次有意识的停顿——就像翻动一本纸质杂志时，手指与纸面摩擦的声响。</p>
+                <p>不必总是赶往下一个目的地，有时候，停留本身就有重量。</p>
+            </section>
+
+            <section class="feature-item">
+                <h2>🧩 拼贴 <small>· 秩序与意外</small></h2>
+                <p>我们接触的信息像被拆散的拼图：一行标题、一张图片、一段被折叠的对话。真正让人记住的，往往不是最规整的那块，而是拼贴时留下的缝隙与错位。从内容组织到视觉呼吸，<a href="https://ssl-portal-huatihui.com" class="emphasis-link">华体会</a>支持一种「有准备的松散」——让每个板块都有属于自己的呼吸节奏，同时又不至于散落一地。</p>
+                <p>好的编排，是让人感觉不到编排的存在。</p>
+            </section>
+
+            <section class="feature-item">
+                <h2>🛋️ 界面之外 <small>· 触感与余白</small></h2>
+                <p>一次浏览的结束，不应该是眼睛的疲惫。我们习惯在深色背景下端详浅色文字，又在白色区域里寻找重点。这种明暗交替，像极了生活里转换场景的瞬间。让每个按钮、每段间隔都留出刚好能让人喘口气的余白，是<a href="https://ssl-portal-huatihui.com" class="emphasis-link">华体会</a>一贯的克制。</p>
+                <p>少一点刺激，多一点质地。屏幕也可以有「手感」。</p>
+            </section>
+
+        </div>
+
+        <!-- 附加提示、FAQ摘要风格 -->
+        <div class="extra-note">
+            <span class="tag">📌 日常观察 <i>杂志式浏览</i></span>
+            <span class="more">Q: 如何找到入口？<br> A: 所有路径都聚向同一处——不必刻意记忆，自然就好。</span>
+        </div>
+
+        <!-- 简短的背景说明 (在杂志专题中常以脚注形式出现) -->
+        <div style="border-top: 1px solid #ddd6ca; padding-top: 1.8rem; margin-top: 0.2rem; display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: #5a5247;">
+            <div style="flex: 1; min-width: 200px;">
+                <strong style="font-weight: 500;">背景</strong><br>
+                本页灵感源于数字阅读中的触感与停顿。「华体会」作为一种泛指的生活观察原点，不依附于特定品牌叙事，只保留对质地与节奏的关注。
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <strong style="font-weight: 500;">基调</strong><br>
+                不以功能罗列取胜，而尝试用杂志式的分段讲述，让浏览成为一种温和的体验。
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 页尾访问提示：自然句，无“点击进入”等指令词 -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>若你认同这种节奏，不妨将<a href="https://ssl-portal-huatihui.com">华体会</a>记在书签一侧，等某个安静的下午再打开。</p>
+            <small>—— 杂志专题 · 不赶时间 ——</small>
+        </div>
+    </footer>
+
+</body>
+</html>
